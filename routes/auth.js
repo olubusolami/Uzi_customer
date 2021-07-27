@@ -5,11 +5,15 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const { registerValidation } = require("../validation");
 
 router.post("/register", async (req, res) => {
   try {
-    // checking if user is already in the database
+    // lets validate the data before making a user
+    const { error } = registerValidation(req.body);
+    if (error) return res.status(400).json(error.details[0].message);
 
+    // checking if user is already in the database
     const emailExist = await User.findOne({ email: req.body.email });
     if (emailExist)
       return res.status(400).json({ message: "Email already exist" });
@@ -33,9 +37,12 @@ router.post("/register", async (req, res) => {
 
     //create a new user
     const theUser = new User({
-      name: req.body.name,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
       password: hashedPassword,
+      company: req.body.company,
+      phoneNumber: req.body.phoneNumber,
     });
 
     const user = await theUser.save();
