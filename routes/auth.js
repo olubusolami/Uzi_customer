@@ -68,8 +68,8 @@ router.post("/register", async (req, res) => {
       from: '"Uzi Team" <uzi_customer@example.com>',
       to: `${user.email}`,
       subject: "Account Verification Link",
-      text: `Hey ${req.body.name}, it’s our first message sent with Nodemailer`, // This is for normal text display while the html is to format the text in an html format
-      html: `<b>Hey ${req.body.name}! </b><br> Kindly verify your account by clicking the link <a href="http://${req.headers.host}/api/user/verify/${token.token}">here</a>`,
+      text: `Hey ${req.body.firstName}, it’s our first message sent with Nodemailer`, // This is for normal text display while the html is to format the text in an html format
+      html: `<b>Hey ${req.body.firstName}! </b><br> Kindly verify your account by clicking the link <a href="http://${req.headers.host}/api/user/verify/${token.token}">here</a>`,
     };
 
     transport.sendMail(mailOptions, (error, info) => {

@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-// const bcrypt = require("bcrypt");
-// const bcryptSalt = process.env.BCRYPT_SALT;
 
 const userSchema = new mongoose.Schema(
   {
@@ -8,13 +6,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      unique: true,
     },
     lastName: {
       type: String,
       trim: true,
       required: true,
-      unique: true,
     },
     email: {
       type: String,
@@ -30,7 +26,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      unique: true,
     },
     isVerified: { type: Boolean, default: false },
 
